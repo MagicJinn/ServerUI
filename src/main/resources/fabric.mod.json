@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "serverui",
+	"version": "${version}",
+	"name": "ServerUI",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/serverui/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"magicjinn.serverui.ServerUI"
+		],
+		"client": [
+			"magicjinn.serverui.ServerUIClient"
+		],
+		"fabric-datagen": [
+			"magicjinn.serverui.ServerUIDataGenerator"
+		]
+	},
+	"mixins": [
+		"serverui.mixins.json",
+		{
+			"config": "serverui.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.3",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
