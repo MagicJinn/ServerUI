@@ -31,4 +31,11 @@ public class ShulkerBoxBlockMixin {
         // Return empty OptionalInt to prevent the menu from opening
         return java.util.OptionalInt.empty();
     }
+
+    private boolean isOwnedByServerUI() {
+        // TEMPORARY: Always return true
+        // In the future, this will check whether this block is owned by ServerUI, using
+        // a global registry of ServerUI blocks
+        return true;
+    }
 }
