@@ -90,13 +90,13 @@ Whenever our Interaction Blocks are created, we can immediately create a Display
 
 ### Custom Items
 
-Custom items are easier to implement than custom blocks, as Minecraft already has had very extensive suite of tools to customize items and their attributes for a while, and it has been expanded even more recently. We now have the ability to give any item a custom texture, so this will never be a problem for us. Most attributes of an item can be altered easily, but it should be noted that it is best to keep these 2 attributes the same as the original item, as not every aspect of the game has been altered to handle changes to them. They are as follows:
+Custom items are easier to implement than custom blocks, as Minecraft already has had very extensive suite of tools to customize items and their attributes for a while, and it has been expanded even more recently. We now have the ability to give any item a custom texture, so this will never be a problem for us. Most attributes of an item can also be altered as easily, but it should be noted that it is best to keep these 2 attributes the same as the original item, as Mojang may have not properly removed legacy code that is hardcoded to check for specific items. They are as follows:
 
-1. Stack size: While stack size can be set to 1-99, the original items stack size will sometimes still be used in certain scenarios (even if the stack size is set to 64, a single potion will fill up a bundle, but only visually (desync))
-2. Items used in recipes or processes will sometimes still be used in those processes, like (fuel, furnace inputs and potions).
+1. Stack size: While stack size can be set to 1-99, the original item's stack size will sometimes still be used in certain scenarios. For example, bundles have hardcoded stack size checks, so even if a potion's stack size is set to 64, a single potion will still fill up a bundle (though only visually, causing a desync).
+2. Items used in recipes or processes: Items will sometimes still be used in those processes (like fuel, furnace inputs, and potions), or will or won't be accepted into certain containers, if not properly accounted for in the code. For instance, potions may still be allowed into brewing stands even if their components have changed.
 
-For non-stackable usable items, we need an item that has a right-click action that can be performed at any moment without consequences, does not have any consequences of holding it (excludes certain food items and fishing rod types), but cannot be used in any recipes (excludes items like potions).
-
-#### TODO: Find candidate for non-stackable custom item
+For non-stackable usable items, we need an item that has a right-click action that can be performed at any moment without consequences, does not have any consequences of holding it (excludes certain food items and fishing rod types), and cannot be used in any recipes (excludes items like potions). The perfect candidate for this is the Knowledge Book. It has no usage restriction, and is completely unused, allowing us to give it any custom behaviour we want. We don't even need to use it in the roundabout way datapacks use it (recipe unlock > advancement > mcfunction), as we can directly hook into the items usage code.
 
 For stackable usable items, we can use an item like Firework Rockets. These also have no placing restriction, no uses in recipes or processes, can stack to 64, and we can disable the spawning of the actual fireworks and the effects and sounds that go with it for our special item.
+
+There are no other items necessary to implement custom items, as all other item properties are already extremely customizable and do not cause any issues like the properties mentioned above.
